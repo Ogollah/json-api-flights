@@ -1,9 +1,11 @@
 # Load required libraries
-library(data.table)
+install.packages("nycflights13")
+install.packages("data.table")
 library(nycflights13)
+library(data.table)
 
 # Optimize threading
-setDTthreads(0)  # Use all available CPU cores
+setDTthreads(0)
 
 # Load flights dataset
 flights_dt <- as.data.table(flights)
@@ -20,3 +22,4 @@ flights_dt[, delayed := dep_delay > 15]
 
 # Save processed data as CSV
 fwrite(flights_dt, "processed_flights.csv", nThread = getDTthreads())
+
